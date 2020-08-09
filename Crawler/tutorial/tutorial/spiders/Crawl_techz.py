@@ -19,7 +19,6 @@ class Crawl(scrapy.Spider):
                 "keywork" :  [ 
                     k.strip() for k in response.css('meta[name="keywords"]::attr("content")').get().split(',')
                 ],
-                # "Tags" :List_tags,
                 "Noi dung": response.css("div.detail-text p::text").getall(),
                 "Tác giả" : response.css("div.mr-auto a::text").get(),
                 "Nguồn": response.css("div.mr-auto span.mr-3 a::text").get()
