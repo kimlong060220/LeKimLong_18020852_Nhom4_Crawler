@@ -7,16 +7,18 @@ class Crawl(scrapy.Spider):
     def start_requests(self):
         yield scrapy.Request(url = "https://websosanh.vn/"  , callback= self.get_link_Categories)
     
-
+    # Lấy link các danh mục 
     def get_link_Categories(self , response ) :
         for link in response.css("div.menu-main > ol.list-no-style > li.has-child"):
             yield scrapy.Request(url = link.css("a::attr(href)").get() , callback= self.get_link_product)
-
+    # "Lấy link sản phẩm từ trang danh mục"
     def get_link_product(self , response):
         for link in response.css("div.page-content-wrap > ul.list-no-style > li.product-item"):
             yield scrapy.Request(url = link.css("a::attr(href)").get() , callback= self.parse)
         for link in response.css("div.pagination-wrap > ul.pagination > li"):
             yield scrapy.Request(url = link.css("a::attr(href)").get() , callback= self.get_link_product)
+    # Thực hiện thu thập dữ liệu 
+    # Hạn chế chưa lấy được hết giá so sánh ở trang vì do nó nằm ở trang 2 3 .
     def parse(self, response):
         specifications =[]
         prices = []
