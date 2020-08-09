@@ -8,6 +8,7 @@ class Crawl(scrapy.Spider):
     start_urls = ["https://www.techz.vn"]
         
     def parse(self, response):
+        # Đây là điều kiện để được thu thập là trang mở được và là trang có content là article 
         if response.status == 200 and response.css('meta[property="og:type"]::attr("content")').get() == 'article':
             article = {
                 "Link" : response.url, 

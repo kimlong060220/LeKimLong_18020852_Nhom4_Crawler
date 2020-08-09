@@ -4,6 +4,7 @@ import codecs
 class Crawl(scrapy.Spider):
     name = "kenh14"
     sequence_number = 0
+    # Code này là code đầu tiên nên em lấy link các danh mục để truy cập 
     def start_requests(self):
         base_url = ["https://kenh14.vn/timeline/laytinmoitronglist-{}-2-1-1-1-1-1-0-3-1-0.chn",
         "https://kenh14.vn/timeline/laytinmoitronglist-{}-2-1-1-1-1-2-0-3-1-0.chn",
@@ -16,7 +17,6 @@ class Crawl(scrapy.Spider):
         "https://kenh14.vn/timeline/laytinmoitronglist-{}-2-1-1-1-1-149-0-3-1-0.chn",
         "https://kenh14.vn/timeline/laytinmoitronglist-{}-2-1-1-1-1-152-0-3-1-0.chn",
         ]
-
         for url in base_url:
             for i in range(200):
                 # for j in range(20):
